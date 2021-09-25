@@ -1,6 +1,6 @@
 {
     "name": "@candlelib/log",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Lightweight Logging Library",
     "main": "./build/library/logger.js",
     "types": "./build/types/logger.d.ts",
