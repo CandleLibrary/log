@@ -9,6 +9,9 @@
   "license": "MIT",
   "private": false,
   "type": "module",
+  "scripts": {
+    "test": "candle.cure ./test/"
+  },
   "devDependencies": {
     "@types/node": "^16.10.1",
     "@candlelib/cure": "^0.6.1"
