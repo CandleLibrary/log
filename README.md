@@ -18,9 +18,12 @@ Use within your project
 
 ```typescript
 
-import log from "@candlelib/log"
+import { Logger } from "@candlelib/log"
 
-const logger = log.createLogger("Test")
+const logger = Logger.createLogger("Test")
+
+//Activate Required Log Levels
+logger.activate(logger.LogLevel.WARN | logger.LogLevel.DEBUG | logger.LogLevel.INFO);
 
 logger.log("Hello World")
 
