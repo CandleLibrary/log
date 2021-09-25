@@ -1,0 +1,10 @@
+{
+  "name": "@candlelib/log",
+  "version": "0.0.1",
+  "description": "Lightweight Logging Library",
+  "main": "index.js",
+  "repository": "github.com/CandleLibrary/log",
+  "author": "Anthony Weathersby",
+  "license": "MIT",
+  "private": false
+}
