@@ -140,6 +140,7 @@ export class Logger {
             child_logger._name = name;
             child_logger.parent = this;
             child_logger.update_name();
+            child_logger.ACTIVE = this.ACTIVE;
         }
 
         return child_logger;
