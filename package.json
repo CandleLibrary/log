@@ -12,6 +12,12 @@
     "scripts": {
         "test": "candle.cure ./test/"
     },
+    "files": [
+        "/build",
+        "/README.md",
+        "/CHANGELOG.md",
+        "/LICENSE"
+    ],
     "devDependencies": {
         "@types/node": "^16.10.1",
         "@candlelib/cure": "^0.6.1"
