@@ -71,6 +71,8 @@ export class Logger {
 
         for (const child of this.children)
             child.deactivate(log_level);
+            
+        return this;
     }
 
     activate(log_level: LogLevel = LogLevel.CRITICAL | LogLevel.ERROR | LogLevel.WARN | LogLevel.DEBUG | LogLevel.INFO) {
@@ -79,30 +81,36 @@ export class Logger {
 
         for (const child of this.children)
             child.activate(log_level);
+
+        return this;
     }
 
     log(...args) {
         if (this.ACTIVE & LogLevel.INFO)
             for (const writer of this.log_writers)
                 writer.writeLog(this.render_name, LogLevel.INFO, ...args);
+        return this;
     }
 
     error(...args) {
         if (this.ACTIVE & LogLevel.ERROR)
             for (const writer of this.log_writers)
                 writer.writeLog(this.render_name, LogLevel.ERROR, ...args);
+        return this;
     }
 
     warn(...args) {
         if (this.ACTIVE & LogLevel.WARN)
             for (const writer of this.log_writers)
                 writer.writeLog(this.render_name, LogLevel.WARN, ...args);
+        return this;
     }
 
     debug(...args) {
         if (this.ACTIVE & LogLevel.DEBUG)
             for (const writer of this.log_writers)
                 writer.writeLog(this.render_name, LogLevel.DEBUG, ...args);
+        return this;
     }
 
     clearWriters() {
