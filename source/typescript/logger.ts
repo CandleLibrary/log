@@ -11,6 +11,7 @@ export class LogWriter {
     writeLog(
         logger_name: string,
         log_level: LogLevel,
+        REWRITE: boolean,
         ...args: any[]
     ) {
         switch (log_level) {
@@ -71,7 +72,7 @@ export class Logger {
 
         for (const child of this.children)
             child.deactivate(log_level);
-            
+
         return this;
     }
 
@@ -85,31 +86,44 @@ export class Logger {
         return this;
     }
 
+    rewrite_log(...args) {
+        if (this.ACTIVE & LogLevel.INFO)
+            for (const writer of this.log_writers)
+                writer.writeLog(this.render_name, LogLevel.INFO, true, ...args);
+        return this;
+    }
+
     log(...args) {
         if (this.ACTIVE & LogLevel.INFO)
             for (const writer of this.log_writers)
-                writer.writeLog(this.render_name, LogLevel.INFO, ...args);
+                writer.writeLog(this.render_name, LogLevel.INFO, false, ...args);
+        return this;
+    }
+    critical(...args) {
+        if (this.ACTIVE & LogLevel.CRITICAL)
+            for (const writer of this.log_writers)
+                writer.writeLog(this.render_name, LogLevel.CRITICAL, false, ...args);
         return this;
     }
 
     error(...args) {
         if (this.ACTIVE & LogLevel.ERROR)
             for (const writer of this.log_writers)
-                writer.writeLog(this.render_name, LogLevel.ERROR, ...args);
+                writer.writeLog(this.render_name, LogLevel.ERROR, false, ...args);
         return this;
     }
 
     warn(...args) {
         if (this.ACTIVE & LogLevel.WARN)
             for (const writer of this.log_writers)
-                writer.writeLog(this.render_name, LogLevel.WARN, ...args);
+                writer.writeLog(this.render_name, LogLevel.WARN, false, ...args);
         return this;
     }
 
     debug(...args) {
         if (this.ACTIVE & LogLevel.DEBUG)
             for (const writer of this.log_writers)
-                writer.writeLog(this.render_name, LogLevel.DEBUG, ...args);
+                writer.writeLog(this.render_name, LogLevel.DEBUG, false, ...args);
         return this;
     }
 
