@@ -9,9 +9,11 @@ assert_group(sequence, () => {
         level: -1,
         logger_name: "",
         args: null,
-        writeLog(log_name, level, ...args) {
+        REWRITE: false,
+        writeLog(log_name, level, REWRITE, ...args) {
             test_writer.args = args;
             test_writer.level = level;
+            test_writer.REWRITE = REWRITE;
             test_writer.logger_name = log_name;
 
         }
@@ -28,5 +30,11 @@ assert_group(sequence, () => {
 
     assert(test_writer.logger_name == "test-sub-test");
     assert(test_writer.args == ["warning"]);
+    assert(test_writer.REWRITE == false);
+
+    test_logger.createLogger("sub-test").rewrite_log("warning");
+
+    assert("rewrite_name", test_writer.logger_name == "test-sub-test");
+    assert("rewrite_flag", test_writer.REWRITE == true);
 
 });
