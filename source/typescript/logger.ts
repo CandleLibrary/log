@@ -33,7 +33,7 @@ export class LogWriter {
         }
     }
 }
-
+let __default_log_level__ = 0;
 let __internal_logger__ = null;
 let logs = new Map;
 
@@ -64,6 +64,10 @@ export class Logger {
 
     get LogLevel() {
         return LogLevel;
+    }
+
+    static setDefaultLogLevel(log_level: LogLevel) {
+        __default_log_level__ = log_level;
     }
 
     deactivate(log_level: LogLevel = LogLevel.CRITICAL | LogLevel.ERROR | LogLevel.WARN | LogLevel.DEBUG | LogLevel.INFO) {
@@ -183,8 +187,7 @@ export class Logger {
         if (writer)
             this.addWriter(writer);
 
-        //Logger is deactivated by default
-        this.ACTIVE = 0;
+        this.ACTIVE = __default_log_level__;
     }
     private update_name() {
         this.render_name = (this?.parent?.render_name ? this?.parent?.render_name + "-" : "") + this._name;
